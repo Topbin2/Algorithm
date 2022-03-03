@@ -14,4 +14,4 @@ function solution(A, B) {
     console.log(A * ten);
     console.log(A * hun);
     console.log(A * B);
-}
+} 
