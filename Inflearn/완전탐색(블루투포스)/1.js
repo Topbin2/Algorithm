@@ -2,12 +2,19 @@ function solution(n, arr){
   let answer, max = Number.MIN_SAFE_INTEGER;
   for(let x of arr) {
     let sum = 0, tmp = x;
-    while(tmp){
-      sum += (tmp % 10); //8
-      tmp = Math.floor(tmp/10) //12
+    while(tmp) {
+      sum += tmp % 10; // 0 + 8 + 2 + 1
+      tmp = Math.floor(tmp / 10); // 12, 1, 0 
     }
-    console.log(sum);
+    if(sum > max) { //sum = 11, max = 11
+      max = sum;
+      answer = x;
+    }
+    if(sum === max) {
+      if(x > answer) answer = x;
+    }
   }
+  return answer;
 }
 
 let arr=[128, 460, 603, 40, 521, 137, 123];
