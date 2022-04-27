@@ -25,12 +25,8 @@ function solution(n, arr){
   let max = Number.MIN_SAFE_INTEGER;
 
   for(let x of arr) {
-    let sum = 0;
-    let num = x;
-    while(num) {
-      sum += num % 10;
-      num = Math.floor(num / 10);
-    }
+    let sum = x.toString().split('').reduce((a, b) => Number(a) + Number(b));
+    console.log(sum);
     if(sum > max) {
       answer = sum;
       max = sum;
