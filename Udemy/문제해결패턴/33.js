@@ -26,8 +26,8 @@ function solution(arr, num) {
     maxSum += arr[i]; //4
   }
   tempSum = maxSum;
-  for(let i = 0; i < arr.length - num; i++) {
-    tempSum = tempSum - arr[i] + arr[i + num];
+  for(let i = num; i < arr.length; i++) {
+    tempSum = tempSum - arr[i - num] + arr[i];
     maxSum = Math.max(maxSum, tempSum);
   }
   
