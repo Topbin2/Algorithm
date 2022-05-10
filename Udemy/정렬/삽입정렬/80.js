@@ -11,4 +11,3 @@ function solution(arr) {
 
 console.log(solution([1,5,2,6,4,3]));
 
-// 1,5,5
