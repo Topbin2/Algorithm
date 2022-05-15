@@ -1,18 +1,26 @@
 function solution(sizes) {
-  let big = [];
-  let small = [];
+  // let big = [];
+  // let small = [];
 
-  for(let x of sizes) {
-    if(x[0] > x[1]) {
-      big.push(x[0]);
-      small.push(x[1]);
-    } else {
-      big.push(x[1]);
-      small.push(x[0]);
-    }
-  }
+  // for(let x of sizes) {
+  //   if(x[0] > x[1]) {
+  //     big.push(x[0]);
+  //     small.push(x[1]);
+  //   } else {
+  //     big.push(x[1]);
+  //     small.push(x[0]);
+  //   }
+  // }
 
-  return Math.max(...big) * Math.max(...small);
+  // return Math.max(...big) * Math.max(...small);
+
+  let result = [0, 0];
+  sizes.forEach( arr => {
+    let [a, b] = arr.sort((a,b) => b - a);
+    if(a > result[0]) result[0] = a;
+    if(b > result[1]) result[1] = b;
+  })
+  return result[0] * result[1];
 }
 
 console.log(solution([[60, 50], [30, 70], [60, 30], [80, 40]])); // 4000
