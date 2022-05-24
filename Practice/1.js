@@ -1,12 +1,18 @@
-function solution(long, short) {
-  let count = 0;
-  for (let i = 0; i < long.length; i++) {
-    for (let j = 0; j < short.length; j++) {
-      if(long[i + j] !== short[j]) break;
-      if(j === short.length - 1) count++;
-    }
+function computeWhenDouble(interestRate) {
+  // TODO: 여기에 코드를 작성합니다.
+
+  let initialValue = 100;
+  let year = 0;
+
+  while(initialValue < 200) {
+    initialValue += initialValue * (interestRate * 0.01);
+    year++; 
   }
-  return count;
+
+  return year;
 }
 
-console.log(solution("lorie loledasdloladsslol", "lol"));
+console.log(computeWhenDouble(1)); // 70
+console.log(computeWhenDouble(2.3)); // 31
+console.log(computeWhenDouble(7)); // 11
+console.log(computeWhenDouble(100)); // 1
