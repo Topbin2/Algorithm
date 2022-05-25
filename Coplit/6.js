@@ -4,9 +4,16 @@ function letterCapitalize(str) {
   let result = '';
 
   for(let i = 0; i < str.length; i++) {
-    if(i === 0) result += str[i].toUpperCase();
+    if(i === 0) {
+      result += str[i].toUpperCase();
+      continue;
+    }
     
+    if(str[i - 1] === ' ') result += str[i].toUpperCase();
+    else result += str[i];
   }
+
+  return result;
 }
 
 let output1 = letterCapitalize('hello world');
