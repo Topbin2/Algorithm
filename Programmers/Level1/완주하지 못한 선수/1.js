@@ -1,5 +1,4 @@
 function solution(participant, completion) {
-  let result = "";
 
   participant.sort();
   completion.sort();
