@@ -104,6 +104,17 @@ class SinglyLinkedList {
     this.length++;
     return true;
   }
+
+  remove(index) {
+    if(index < 0 || index >= this.length) return undefined;
+    if(index === 0) return this.shift();
+    if(index === this.length - 1) return this.pop();
+    const previousNode = this.get(index - 1);
+    const removed = previousNode.next;
+    previousNode.next = removed.next;
+    this.length--;
+    return removed;
+  }
 }
 
 const list = new SinglyLinkedList();
@@ -113,4 +124,8 @@ list.push(100);
 list.push(200);
 list.push(300);
 
-console.log(list.insert(3, 400));
+console.log(list);
+
+list.remove(2);
+
+console.log(list);
