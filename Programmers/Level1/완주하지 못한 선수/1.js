@@ -1,10 +1,25 @@
 function solution(participant, completion) {
 
-  participant.sort();
-  completion.sort();
+  // participant.sort();
+  // completion.sort();
 
-  for (let i = 0; i < participant.length; i++) {
-    if(participant[i] !== completion[i]) return participant[i];
+  // for (let i = 0; i < participant.length; i++) {
+  //   if(participant[i] !== completion[i]) return participant[i];
+  // }
+
+  let obj = {};
+
+  for(let x of participant) {
+    if(!(x in obj)) obj[x] = 1;
+    else obj[x]++;
+  }
+
+  for(let x of completion) {
+    if(x in obj) obj[x]--;
+  }
+
+  for(let x in obj) {
+    if(obj[x] === 1) return x;
   }
 }
 
