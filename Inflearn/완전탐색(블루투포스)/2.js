@@ -20,14 +20,39 @@ function isPrime(num) {
 //   return answer;
 // }
 
+// function solution(arr) {
+//   let answer = [];
+//   for (let x of arr) {
+//     let res = x.toString().split("").reverse().join("");
+//     res = Number(res);
+//     if (isPrime(res)) answer.push(res);
+//   }
+//   return answer;
+// }
+
+// let arr = [32, 55, 62, 20, 250, 370, 200, 30, 100];
+// console.log(solution(arr));
+
 function solution(arr) {
-  let answer = [];
-  for (let x of arr) {
-    let res = x.toString().split("").reverse().join("");
-    res = Number(res);
-    if (isPrime(res)) answer.push(res);
+  const result = [];
+
+  const newArr = arr.map(num => Number(num.toString().split('').reverse().join('')));
+
+  for(let x of newArr) {
+    if(isPrime(x)) result.push(x);
   }
-  return answer;
+
+  return result;
+}
+
+function isPime(num) {
+  if(num < 2) return false;
+
+  for(let i = 2; i <= Math.sqrt(num); i++) {
+    if(num % i === 0) return false;
+  }
+
+  return true;
 }
 
 let arr = [32, 55, 62, 20, 250, 370, 200, 30, 100];
