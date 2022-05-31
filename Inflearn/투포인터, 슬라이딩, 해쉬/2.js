@@ -1,5 +1,17 @@
 function solution(arr1, arr2){
-  
+  const result = [];
+
+  for(let x of arr1) {
+    for(let y of arr2) {
+      if(x === y) {
+        result.push(x);
+        continue;
+      };
+    }
+  }
+
+  result.sort((a,b) => a - b);
+  return result;
 }
 
 let a=[1, 3, 9, 5, 2];
