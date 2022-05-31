@@ -20,24 +20,60 @@
 // let arr=[128, 460, 603, 40, 521, 137, 123];
 // console.log(solution(7, arr));
 
-function solution(n, arr){
-  let answer;
-  let max = Number.MIN_SAFE_INTEGER;
+// function solution(n, arr){
+//   let answer;
+//   let max = Number.MIN_SAFE_INTEGER;
 
-  for(let x of arr) {
-    let sum = x.toString().split('').reduce((a, b) => Number(a) + Number(b));
-    console.log(sum);
-    if(sum > max) {
-      answer = sum;
-      max = sum;
+//   for(let x of arr) {
+//     let sum = x.toString().split('').reduce((a, b) => Number(a) + Number(b));
+//     console.log(sum);
+//     if(sum > max) {
+//       answer = sum;
+//       max = sum;
+//     }
+//     if(sum === max) {
+//       if(answer < x) answer = x;
+//     }
+//   }
+
+//   return answer;
+// }
+
+// let arr=[128, 460, 603, 40, 521, 137, 123];
+// console.log(solution(7, arr));
+
+function solution(arr){
+  let convertSum = [];
+  
+  const sumArr = arr.map(num => num.toString());
+
+  for(let i = 0; i < sumArr.length; i++) {
+    let sum = 0;
+    for(let j = 0; j < sumArr[i].length; j++) {
+      sum += Number(sumArr[i][j]);
     }
-    if(sum === max) {
-      if(answer < x) answer = x;
-    }
+    convertSum.push(sum);
   }
 
-  return answer;
+  const max = Math.max(...convertSum);
+
+  const result = [];
+
+  for(let i = 0; i < convertSum.length; i++) {
+    if(max === convertSum[i]) result.push(i);
+  }
+
+  if(result.length === 1) return arr[result[0]];
+  else {
+    const answer = [];
+
+    for(let i = 0; i < result.length; i++) {
+      answer.push(arr[result[i]]);
+    }
+
+    return Math.max(...answer);
+  }
 }
 
 let arr=[128, 460, 603, 40, 521, 137, 123];
-console.log(solution(7, arr));
+console.log(solution(arr));
