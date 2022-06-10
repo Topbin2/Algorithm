@@ -27,17 +27,29 @@
 // }
 
 function solution(arr, val) {
+  // let start = 0;
+  // let end = arr.length - 1;
+  // let center = Math.floor((start + end) / 2);
+
+  // while(arr[center] !== val && start <= end) {
+  //   if(arr[center] < val) start = center + 1;
+  //   else end = center - 1;
+  //   center = Math.floor((start + end) / 2);
+  // }
+
+  // return arr[center] === val ? center : -1;
+
   let start = 0;
   let end = arr.length - 1;
-  let center = Math.floor((start + end) / 2);
+  let middle = Math.floor((start + end) / 2);
 
-  while(arr[center] !== val && start <= end) {
-    if(arr[center] < val) start = center + 1;
-    else end = center - 1;
-    center = Math.floor((start + end) / 2);
+  while(arr[middle] !== val && start <= end) {
+    if(arr[middle] < val) start = middle + 1;
+    else end = middle - 1;
+    middle = Math.floor((start + end) / 2);
   }
 
-  return arr[center] === val ? center : -1;
+  return arr[middle] === val ? middle : -1;
 }
 
 
