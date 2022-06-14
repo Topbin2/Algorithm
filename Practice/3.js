@@ -37,10 +37,8 @@ function solution(n, plans, clients) {
     for(let j = 0; j < info.length; j++) {
       if(consumer[i].data < info[j].data) {
         for(let k = 0; k < consumer[i].service.length; k++) {
-          for(let h = 0; h < info[j].service.length; h++) {
-            if(consumer[i].service[k] !== info[j].service[h]) break;
-            if(h === info[j].service.length - 1) arr[i] = info[j].number;
-          }
+          if(!info[j].service.includes(consumer[i].service[k])) break;
+          if(k === consumer[i].service.length - 1) arr[i] = info[j].number;
         }
       }
     }
