@@ -161,7 +161,6 @@ class SinglyLinkedList {
 
   push(val) {
     const newNode = new Node(val);
-
     if(!this.head) {
       this.head = newNode;
       this.tail = newNode;
@@ -176,7 +175,6 @@ class SinglyLinkedList {
 
   pop() {
     if(!this.head) return undefined;
-
     let current = this.head;
     let newTail = current;
 
@@ -184,25 +182,40 @@ class SinglyLinkedList {
       newTail = current;
       current = current.next;
     }
+
     this.tail = newTail;
-    this.tail.next = null;
+    newTail.next = null;
     this.length--;
+    if(this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
     return current;
   }
-
-  // 노드가 없으면 undefined
-  // 노드가 있으면 헤드를 다른 변수에 저장하고
-  // 헤드를 현재헤드의 넥스트로 할당
-  // 길이 1 감소, 만약 길이가 0이되면, 헤드와 테일 null
-  // 기존의 헤드 리턴
 
   shift() {
     if(!this.head) return undefined;
     let currentHead = this.head;
     this.head = currentHead.next;
     this.length--;
-    if(this.length === 0) this.tail = null;
+    if(this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
     return currentHead;
+  }
+
+  unshift(val) {
+    const newNode = new Node(val);
+    if(!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+    return this;
   }
 }
 
