@@ -174,7 +174,7 @@ class SinglyLinkedList {
     return this;
   }
 
-  push() {
+  pop() {
     if(!this.head) return undefined;
 
     let current = this.head;
@@ -189,14 +189,24 @@ class SinglyLinkedList {
     this.length--;
     return current;
   }
+
+  // 노드가 없으면 undefined
+  // 노드가 있으면 헤드를 다른 변수에 저장하고
+  // 헤드를 현재헤드의 넥스트로 할당
+  // 길이 1 감소, 만약 길이가 0이되면, 헤드와 테일 null
+  // 기존의 헤드 리턴
+
+  shift() {
+    if(!this.head) return undefined;
+    let currentHead = this.head;
+    this.head = currentHead.next;
+    this.length--;
+    if(this.length === 0) this.tail = null;
+    return currentHead;
+  }
 }
 
 const list = new SinglyLinkedList();
-
-
-100 200 300 400 500
-                  c
-              n
 
 list.push(100);
 list.push(200);
