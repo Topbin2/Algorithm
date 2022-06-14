@@ -10,6 +10,8 @@ function findBugInApples(arr) {
   }
   
   return result;
+
+
 }
 
 let output = findBugInApples([['A'], ['B']]);
