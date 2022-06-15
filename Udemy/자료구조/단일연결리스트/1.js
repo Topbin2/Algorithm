@@ -324,6 +324,26 @@ class SinglyLinkedList {
       return currentNode;
     }
   }
+
+  set(index, val) {
+    const foundNode = this.get(index);
+    if(foundNode) {
+      foundNode.val = val;
+      return true;
+    }
+
+    return false;
+  }
+
+  // 인자로 index, val
+  // 새로운 노드 생성
+  // index 0보다 작거나, 길이보다 클 경우 false
+  // index가 길이와 같을경우 push
+  // index가 0 일 경우 unshift
+  // get(index - 1) 이용하여 위치 찾기 -> 하나 전에 위치한 노드
+  // 위에서 찾은 노드의 next가 새로운 노드를 가리키도록
+  // 새로운 노드의 next로 이전의 next였던 노드를 연결
+  // true or false 리턴
 }
 
 const list = new SinglyLinkedList();
