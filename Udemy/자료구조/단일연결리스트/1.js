@@ -144,100 +144,7 @@
 //   }
 // }
 
-// class Node {
-//   constructor(val) {
-//     this.val = val;
-//     this.next = null;
-//   }
-// }
 
-// class SinglyLinkedList {
-
-//   constructor() {
-//     this.head = null;
-//     this.tail = null;
-//     this.length = 0;
-//   }
-
-//   push(val) {
-//     const newNode = new Node(val);
-//     if (!this.head) {
-//       this.head = newNode;
-//       this.tail = newNode;
-//     } else {
-//       this.tail.next = newNode;
-//       this.tail = newNode;
-//     }
-
-//     this.length++;
-//     return this;
-//   }
-
-//   pop() {
-//     if (!this.head) return undefined;
-//     let current = this.head;
-//     let newTail = current;
-
-//     while (current.next) {
-//       newTail = current;
-//       current = current.next;
-//     }
-
-//     this.tail = newTail;
-//     newTail.next = null;
-//     this.length--;
-//     if (this.length === 0) {
-//       this.head = null;
-//       this.tail = null;
-//     }
-//     return current;
-//   }
-
-//   shift() {
-//     if (!this.head) return undefined;
-//     let currentHead = this.head;
-//     this.head = currentHead.next;
-//     this.length--;
-//     if (this.length === 0) {
-//       this.head = null;
-//       this.tail = null;
-//     }
-//     return currentHead;
-//   }
-
-//   unshift(val) {
-//     const newNode = new Node(val);
-//     if (!this.head) {
-//       this.head = newNode;
-//       this.tail = newNode;
-//     } else {
-//       newNode.next = this.head;
-//       this.head = newNode;
-//     }
-//     this.length++;
-//     return this;
-//   }
-//   인덱스를 기준으로 접근할때는, 리스트보다는 배열을 사용하는 것이 좋음.
-
-//   인자로 인덱스를 전달받음 (인덱스 범위에 따라 엣지 케이스)
-//   인덱스가 음수이거나 리스트의 길이보다 같거나 크면 null
-//   루프로 인덱스 만큼 반복해서 해당 위치의 인덱스에 있는 노드를 리턴 (counter 변수 사용)
-
-//   get(index) {
-//     if (index < 0 || index >= this.length) return null;
-//     else {
-//       let count = 0;
-//       let currentNode = this.head;
-//       while (count !== index) {
-//         currentNode = currentNode.next;
-//         count++;
-//       }
-//       return currentNode;
-//     }
-//   }
-
-  
-// }
 
 class Node {
   constructor(val) {
@@ -344,6 +251,20 @@ class SinglyLinkedList {
   // 위에서 찾은 노드의 next가 새로운 노드를 가리키도록
   // 새로운 노드의 next로 이전의 next였던 노드를 연결
   // true or false 리턴
+  insert(index, val) {
+    if(index < 0 || index > this.length) return false;
+    if(index === 0) return !!this.unshift(val);
+    if(index === this.length) return !!this.push(val);
+
+    const newNode = new Node(val);
+    const prevNode = this.get(index - 1);
+    const prevNextNode = prevNode.next;
+
+    prevNode.next = newNode;
+    newNode.next = prevNextNode;
+    this.length++;
+    return true;
+  }
 }
 
 const list = new SinglyLinkedList();
