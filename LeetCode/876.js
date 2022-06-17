@@ -31,5 +31,7 @@ let middleNode = function(head) {
 
 };
 
-Input: head = [1,2,3,4,5,6]
-Output: [4,5,6]
+console.log(middleNode([1,2,3,4,5,6]));
+
+// Input: head = [1,2,3,4,5,6]
+// Output: [4,5,6]
