@@ -1,27 +1,24 @@
-function solution(p) {
-  const arr = new Array(p.length).fill(0);
+function unpackGiftbox(giftBox, wish) {
+  // TODO: 여기에 코드를 작성합니다.
 
-  // [1, 0, 0, 1, 0]
+  console.log(`giftBox: ${giftBox}`);
 
-  for(let i = 0; i < p.length - 1; i++) {
-      let temp = p[i];
-      const min = Math.min(...p.slice(i))
-
-          for(let j = i + 1; j < p.length; j++) {
-              if(p[j] === min && temp > p[j]) {
-                  p[i] = p[j];
-                  p[j] = temp;
-
-                  arr[i]++;
-                  arr[j]++;
-              }
-          }
+  for(let x of giftBox) {
+    if(Array.isArray(x)) {
+      return unpackGiftbox(...x, wish);
+    }
+    else {
+      if(x === wish) return true;
+    }
   }
 
-  return arr;
+  return false;
 }
 
-  // [2, 5, 3, 1, 4] temp = 2, min = 1 [1, 0, 0, 1, 0]
-  // [1, 5, 3, 2, 4] temp = 5, min = 2 [1, 1, 0, 2, 0]
-  // [1, 2, 3, 5, 4] temp = 3, min = 4 
-  // 
+const giftBox = ['macbook', 'mugcup', ['eyephone', 'postcard'], 'money'];
+
+let output = unpackGiftbox(giftBox, 'iphone');
+console.log(output); // --> false
+
+// output = unpackGiftbox(giftBox, 'postcard');
+// console.log(output); // --> true
