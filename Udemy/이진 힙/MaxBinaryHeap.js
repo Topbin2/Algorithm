@@ -85,5 +85,4 @@ heap.extractMax();
 heap.extractMax();
 heap.extractMax();
 
-
 console.log(heap.values);
