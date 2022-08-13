@@ -1,24 +1,29 @@
-function unpackGiftbox(giftBox, wish) {
+function missHouseMeal(sideDishes) {
   // TODO: 여기에 코드를 작성합니다.
 
-  console.log(`giftBox: ${giftBox}`);
+  const result = [];
 
-  for(let x of giftBox) {
-    if(Array.isArray(x)) {
-      return unpackGiftbox(...x, wish);
-    }
-    else {
-      if(x === wish) return true;
+  function recursion (subset, start) {
+    result.push(subset);
+
+    for(let i = start; i < sideDishes.length; i++) {
+      recursion([...subset, sideDishes[i]], i + 1);
     }
   }
 
-  return false;
+  recursion([], 0);
+
+  result.sort();
+
+  return result;
 }
 
-const giftBox = ['macbook', 'mugcup', ['eyephone', 'postcard'], 'money'];
+let count = 1;
 
-let output = unpackGiftbox(giftBox, 'iphone');
-console.log(output); // --> false
+const arr = new Array(99).fill('1').map((el) => {
+  count++;
+  return el + count;
+});
 
-// output = unpackGiftbox(giftBox, 'postcard');
-// console.log(output); // --> true
+let output = missHouseMeal(arr);
+console.log(output);

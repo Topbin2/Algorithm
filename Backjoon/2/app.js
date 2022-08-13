@@ -2,9 +2,8 @@ const fs = require("fs");
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
 let input = fs.readFileSync(filePath).toString().trim().split("\n");
 
-const count = Number(input.shift());
-const edge = Number(input.shift());
 const arr = input.map((el) => el.split(" "));
+const [vertex, edges, start] = arr.shift().map((el) => Number(el));
 
 class Graph {
   constructor() {
@@ -20,6 +19,27 @@ class Graph {
   addEdge(v1, v2) {
     this.adjacencyList[v1].push(v2);
     this.adjacencyList[v2].push(v1);
+  }
+
+  DFSR(start) {
+    const result = [];
+    const visited = {};
+    const adjacencyList = this.adjacencyList;
+
+    function dfs(vertex) {
+      if (!vertex) return null;
+      visited[vertex] = true;
+      result.push(vertex);
+      adjacencyList[vertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          return dfs(neighbor);
+        }
+      });
+    }
+
+    dfs(start);
+
+    return result;
   }
 
   DFSI(start) {
@@ -41,27 +61,6 @@ class Graph {
         }
       });
     }
-
-    return result;
-  }
-
-  DFSR(start) {
-    const result = [];
-    const visited = {};
-    const adjacencyList = this.adjacencyList;
-
-    function dfs(vertex) {
-      if (!vertex) return null;
-      visited[vertex] = true;
-      result.push(vertex);
-      adjacencyList[vertex].forEach((neighbor) => {
-        if (!visited[neighbor]) {
-          return dfs(neighbor);
-        }
-      });
-    }
-
-    dfs(start);
 
     return result;
   }
@@ -92,7 +91,7 @@ class Graph {
 
 const g = new Graph();
 
-for (let i = 1; i <= count; i++) {
+for (let i = 1; i <= vertex; i++) {
   g.addVertex(i);
 }
 
@@ -100,4 +99,20 @@ arr.forEach((edge) => {
   g.addEdge(edge[0], edge[1]);
 });
 
-console.log(g.BFS("1").length - 1);
+const DFS = g.DFSR(start).map((el) => Number(el));
+const BFS = g.BFS(start).map((el) => Number(el));
+
+console.log(...DFS);
+console.log(...BFS);
+
+//   5
+//  / \
+// 4   2
+// |   |
+// 3 ㅡ 1
+
+//  3
+//  |  \
+//  4 ㅡ 1
+//   \  /
+//    2
