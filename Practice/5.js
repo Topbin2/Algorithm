@@ -1,18 +1,19 @@
-function solution(str1, str2) {
+function solution(arr1, arr2){
+  const result = [];
 
-  const result = [0, []];
-
-  for(let i = 0; i < str1.length; i++) {
-    for(let j = 0; j < str2.length; j++) {
-      if(str1[i + j] !== str2[j]) break;
-      if(j === str2.length - 1) {
-        result[0]++;
-        result[1].push(i + 1);
-      }
+  for(let x of arr1) {
+    for(let y of arr2) {
+      if(x === y) {
+        result.push(x);
+        continue;
+      };
     }
   }
 
+  result.sort((a,b) => a - b);
   return result;
 }
 
-console.log(solution("ABC ABCDAB ABCDABCDABDE ABCDABD", "ABCDABD"));
+let a=[1, 3, 9, 5, 2];
+let b=[3, 2, 5, 7, 8];
+console.log(solution(a, b)); // [2, 3, 5]
