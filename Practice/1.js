@@ -1,29 +1,23 @@
-function missHouseMeal(sideDishes) {
-  // TODO: 여기에 코드를 작성합니다.
-
-  const result = [];
-
-  function recursion (subset, start) {
-    result.push(subset);
-
-    for(let i = start; i < sideDishes.length; i++) {
-      recursion([...subset, sideDishes[i]], i + 1);
-    }
+function solution(test){
+  let answer=0;
+  m=test.length;
+  n=test[0].length;
+  for(let i=1; i<=n; i++){
+      for(let j=1; j<=n; j++){
+          let cnt=0;
+          for(let k=0; k<m; k++){
+              let pi=pj=0;
+              for(let s=0; s<n; s++){
+                  if(test[k][s]===i) pi=s;
+                  if(test[k][s]===j) pj=s;
+              }
+              if(pi<pj) cnt++;
+          }
+          if(cnt===m) answer++;
+      }
   }
-
-  recursion([], 0);
-
-  result.sort();
-
-  return result;
+  return answer;
 }
 
-let count = 1;
-
-const arr = new Array(99).fill('1').map((el) => {
-  count++;
-  return el + count;
-});
-
-let output = missHouseMeal(arr);
-console.log(output);
+let arr=[[3, 4, 1, 2], [4, 3, 2, 1], [3, 1, 4, 2]];
+console.log(solution(arr));
