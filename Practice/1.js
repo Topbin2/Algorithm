@@ -26,6 +26,6 @@ function search(num, arr) {
   return false;
 }
 
-console.log(solution([6,3,2,10,-10], [10, 9, -5, 2, 3, 4, 5, -10])); // 1 0 0 1 1 0 0 1
+console.log(solution([6,3,2,10,-10], [10, 9, -5, 2, 3, 4, 5, -10]));
 
 
