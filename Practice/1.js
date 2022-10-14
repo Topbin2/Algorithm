@@ -1,61 +1,21 @@
-
-function solution(n, plans, clients) {
-  const arr = new Array(clients.length).fill(0);
-
-  const info = []; 
-
-  plans = plans.map((arr) => arr.split(' '));
-
-  let accService = [];
-  for(let i = 0; i < plans.length; i++) {
-      const obj = {
-              number: i + 1,
-              data: Number(plans[i][0]),
-              service: [],
-              } 
-
-      for(let j = 1; j < plans[i].length; j++) {
-            accService.push(plans[i][j]);
-      }
-      obj.service = [...accService];
-      info.push(obj);
-  }
-
-  clients = clients.map((arr) => arr.split(' '));
-
-  const consumer = [];
-
-  for(let i = 0; i < clients.length; i++) {
-          const obj = {
-              data: Number(clients[i][0]),
-              service: [...clients[i].slice(1)],
+function solution(m, product){
+  let answer=0;
+  let n=product.length;
+  product.sort((a, b)=>(a[0]+a[1])-(b[0]+b[1]));
+  for(let i=0; i<n; i++){
+      let money=m-(product[i][0]/2+product[i][1]);
+      let cnt=1;
+      for(let j=0; j<n; j++){
+          if(j!==i && (product[j][0]+product[j][1])>money) break;
+          if(j!==i && (product[j][0]+product[j][1])<=money){
+              money-=(product[j][0]+product[j][1]);
+              cnt++;
           }
-          consumer.push(obj);
-  }
-
-  for(let i = 0; i < consumer.length; i++) {
-    for(let j = 0; j < info.length; j++) {
-      if(consumer[i].data < info[j].data) {
-        for(let k = 0; k < consumer[i].service.length; k++) {
-          if(!info[j].service.includes(consumer[i].service[k])) break;
-          if(k === consumer[i].service.length - 1) arr[i] = info[j].number;
-        }
       }
-    }
-  }
-
-  return arr;
+      answer=Math.max(answer, cnt);
+  }  
+  return answer;
 }
 
-[
-  { number: 1, data: 100, service: [ '1', '3' ] },
-  { number: 2, data: 500, service: [ '1', '3', '4' ] },
-  { number: 3, data: 2000, service: [ '1', '3', '4', '5' ] }
-] [
-  { data: 300, service: [ '3', '5' ] },
-  { data: 1500, service: [ '1' ] },
-  { data: 100, service: [ '1', '3' ] },
-  { data: 50, service: [ '1', '2' ] }
-]
-
-console.log(solution(3, ['100 1 3', '500 4', '2000 5'], ['300 3 5', '1500 1', '100 1 3', '50 1 2']));
+let arr=[[6, 6], [2, 2], [4, 3], [4, 5], [10, 3]];
+console.log(solution(28, arr));
