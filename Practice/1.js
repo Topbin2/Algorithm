@@ -1,88 +1,22 @@
-class PriorityQueue {
-    constructor() {
-      this.values = [];
+function solution(arr, num) {
+    if(arr.length < num) return null;
+    let total = 0;
+    for(let i = 0; i < num; i++) {
+      total += arr[i];
     }
   
-    enqueue(val, priority) {
-      const newNode = new Node(val, priority);
-      this.values.push(newNode);
-      this.bubbleUp();
+    let currentTotal = total;
+  
+    for(let i = num; i < arr.length; i++) {
+      currentTotal += arr[i] - arr[i - num];
+      total = Math.max(total, currentTotal);
     }
-  
-    bubbleUp() {
-      let idx = this.values.length - 1;
-      const element = this.values[idx];
-  
-      while (idx > 0) {
-        let parentIdx = Math.floor((idx - 1) / 2);
-        let parent = this.values[parentIdx];
-        if (element.priority >= parent.priority) break;
-        this.values[parentIdx] = element;
-        this.values[idx] = parent;
-        idx = parentIdx;
-      }
-    }
-  
-    dequeue() {
-      const min = this.values[0];
-      const end = this.values.pop();
-      if (this.values.length > 0) {
-        this.values[0] = end;
-        this.sinkDown();
-      }
-  
-      return min;
-    }
-  
-    sinkDown() {
-      let idx = 0;
-      const length = this.values.length;
-      const element = this.values[0];
-  
-      while (true) {
-        let leftChildIdx = 2 * idx + 1;
-        let rightChildIdx = 2 * idx + 2;
-        let leftChild, rightChild;
-        let swap = null;
-  
-        if (leftChildIdx < length) {
-          leftChild = this.values[leftChildIdx];
-          if (leftChild.priority < element.priority) {
-            swap = leftChildIdx;
-          }
-        }
-  
-        if (rightChildIdx < length) {
-          rightChild = this.values[rightChildIdx];
-          if (
-            (swap === null && rightChild.priority < element.priority) ||
-            (swap !== null && rightChild.priority < leftChild.priority)
-          ) {
-            swap = rightChildIdx;
-          }
-        }
-  
-        if (swap === null) break;
-        this.values[idx] = this.values[swap];
-        this.values[swap] = element;
-        idx = swap;
-      }
-    }
+    return total;
   }
   
-  class Node {
-    constructor(val, priority) {
-      this.val = val;
-      this.priority = priority;
-    }
-  }
-  
-  let ER = new PriorityQueue();
-  ER.enqueue("common cold", 5);
-  ER.enqueue("gunshot wound", 1);
-  ER.enqueue("high fever", 4);
-  ER.enqueue("broken arm", 2);
-  ER.enqueue("glass in foot", 3);
-  
-  console.log(ER);
+  console.log(solution([100,200,300,400], 2)); //700
+  console.log(solution([1,4,2,10,23,3,1,0,20], 4)); //39
+  console.log(solution([-3,4,0,-2,6,-1], 2)); //5
+  console.log(solution([3,-2,7,-4,1,-1,4,-2,1], 2)); //5
+  console.log(solution([2,3], 3)); //null
   
