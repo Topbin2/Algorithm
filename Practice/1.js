@@ -1,22 +1,22 @@
-function solution(arr, num) {
-    if(arr.length < num) return null;
-    let total = 0;
-    for(let i = 0; i < num; i++) {
-      total += arr[i];
-    }
-  
-    let currentTotal = total;
-  
-    for(let i = num; i < arr.length; i++) {
-      currentTotal += arr[i] - arr[i - num];
-      total = Math.max(total, currentTotal);
-    }
-    return total;
+function solution(arr) {
+  const swap = (arr, idx1, idx2) => {
+    [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
   }
-  
-  console.log(solution([100,200,300,400], 2)); //700
-  console.log(solution([1,4,2,10,23,3,1,0,20], 4)); //39
-  console.log(solution([-3,4,0,-2,6,-1], 2)); //5
-  console.log(solution([3,-2,7,-4,1,-1,4,-2,1], 2)); //5
-  console.log(solution([2,3], 3)); //null
-  
+
+  let noSwap;
+  for(let i = arr.length; i > 0; i--) {
+    noSwap = true;
+    for(let j = 0; j < i - 1; j++) {
+      if(arr[j] > arr[j + 1]) {
+        swap(arr, j, j + 1);
+        noSwap = false;
+      }
+    }
+    if(noSwap) break;
+  }
+
+  return arr;
+}
+
+console.log(solution([37,45,29,8, 12,88,100,-3]));
+console.log(solution([8,1,2,3,4]));
