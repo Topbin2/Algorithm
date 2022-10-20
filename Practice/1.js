@@ -1,22 +1,24 @@
-function solution(arr) {
-  const swap = (arr, idx1, idx2) => {
-    [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
-  }
+// 1 3 4   3 3    24
+// 4 2 1   3 3
 
-  let noSwap;
-  for(let i = arr.length; i > 0; i--) {
-    noSwap = true;
-    for(let j = 0; j < i - 1; j++) {
-      if(arr[j] > arr[j + 1]) {
-        swap(arr, j, j + 1);
-        noSwap = false;
+function solution(A, B) {
+  let answer = [];
+
+  for (let i = 0; i < A.length; i++) {
+    // 행렬 A의 행 접근 - A
+    const row = A[i];
+    answer.push([]);
+    // 행렬 B의 열 접근해서 곱하기 - B
+    // 행렬 B의 열 길이
+    for (let j = 0; j < B[0].length; j++) {
+      let sum = 0;
+      // 행렬 B의 행 길이
+      // B는 열을 고정해놓고 행을 이동하기 - C
+      for (let k = 0; k < B.length; k++) {
+        sum += row[k] * B[k][j];
       }
+      answer[i].push(sum);
     }
-    if(noSwap) break;
   }
-
-  return arr;
+  return answer;
 }
-
-console.log(solution([37,45,29,8, 12,88,100,-3]));
-console.log(solution([8,1,2,3,4]));
