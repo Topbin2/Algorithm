@@ -1,21 +1,23 @@
-function solution(arr) {
-  const swap = (arr, idx1, idx2) => {
-    [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
-  };
+function solution(n) {
 
-  for (let i = 0; i < arr.length; i++) {
-    let minIndex = i;
-    for (let j = i + 1; j < arr.length; j++) {
-      if (arr[j] < arr[minIndex]) {
-        minIndex = j;
+  let result = 0;
+
+  for(let i = 1; i <= n; i++) {
+    for(let j = i, sum = 0; j <= n; j++) {
+      sum += j;
+
+      if(sum === n) {
+        result++;
       }
-    }
-    if (minIndex !== i) {
-      swap(arr, minIndex, i);
+
+      if(sum > n) {
+        break;
+      }
+
     }
   }
 
-  return arr;
+  return result;
 }
 
-console.log(solution([34, 22, 10, 19, 17]));
+console.log(solution(15)); // 4
