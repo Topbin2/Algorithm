@@ -1,16 +1,20 @@
-function solution(arr, divisor) {
-  // var answer = [];
-  // for(let x of arr) {
-  //   if(x % divisor === 0) answer.push(x);
-  // }
-  // if(!answer.length) return [-1];
-  // answer.sort((a, b) => a - b);
-  // return answer;
+function solution(arr) {
+  let left = 0;
+  let right = arr.length - 1;
 
-  let answer = arr.filter(num => num % divisor === 0);
-  return answer.length === 0 ? [-1] : answer.sort((a, b) => a - b);
+  while(left < right) {
+    const sum = arr[left] + arr[right];
+    if(sum === 0) {
+      return [arr[left], arr[right]];
+    } else if (sum > 0) {
+      right--;
+    } else {
+      left++;
+    }
+  }
+  return false;
 }
 
-console.log(solution([5,9,7,10], 5)); // [5,10]
-console.log(solution([2,36,1,3], 1)); // [1,2,3,36]
-console.log(solution([3,2,6], 10)); // -1
+console.log(solution([-3, -2, -1, 0, 1, 2, 3]));
+console.log(solution([-2, 0, 1, 3]));
+console.log(solution([1, 2, 3]));
