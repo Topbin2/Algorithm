@@ -1,20 +1,31 @@
-function solution(arr) {
-  let left = 0;
-  let right = arr.length - 1;
+function solution(num1, num2) {
+  if(num1.length !== num2.length) return false;
 
-  while(left < right) {
-    const sum = arr[left] + arr[right];
-    if(sum === 0) {
-      return [arr[left], arr[right]];
-    } else if (sum > 0) {
-      right--;
-    } else {
-      left++;
-    }
+  num1 = String(num1);
+  num2 = String(num2);
+
+  let obj1 = {};
+  let obj2 = {};
+
+  for(let i = 0; i < num1.length; i++) {
+    obj1[num1[i]] = (obj1[num1[i]] || 0) + 1;
   }
-  return false;
+
+  for(let i = 0; i < num2.length; i++) {
+    obj2[num2[i]] = (obj2[num2[i]] || 0) + 1;
+  }
+
+  for(let key in obj1) {
+    if(!(key in obj2)) return false;
+    if(obj1[key] !== obj2[key]) return false;
+  }
+
+  return true;
 }
 
-console.log(solution([-3, -2, -1, 0, 1, 2, 3]));
-console.log(solution([-2, 0, 1, 3]));
-console.log(solution([1, 2, 3]));
+console.log(solution(182,281));
+console.log(solution(34,14));
+console.log(solution(3589578,5879385));
+console.log(solution(22,222));
+
+
