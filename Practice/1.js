@@ -1,31 +1,19 @@
-function solution(num1, num2) {
-  if(num1.length !== num2.length) return false;
+function solution(ingredient) {
+  let result = 0;
 
-  num1 = String(num1);
-  num2 = String(num2);
-
-  let obj1 = {};
-  let obj2 = {};
-
-  for(let i = 0; i < num1.length; i++) {
-    obj1[num1[i]] = (obj1[num1[i]] || 0) + 1;
+  for (let i = 0; i < ingredient.length; i++) {
+    if (ingredient.slice(i, i + 4).join("") === "1231") {
+      console.log("i", i);
+      result++;
+      ingredient.splice(i, 4);
+      i -= 3;
+    }
   }
 
-  for(let i = 0; i < num2.length; i++) {
-    obj2[num2[i]] = (obj2[num2[i]] || 0) + 1;
-  }
-
-  for(let key in obj1) {
-    if(!(key in obj2)) return false;
-    if(obj1[key] !== obj2[key]) return false;
-  }
-
-  return true;
+  return result;
 }
 
-console.log(solution(182,281));
-console.log(solution(34,14));
-console.log(solution(3589578,5879385));
-console.log(solution(22,222));
+console.log(solution([2, 1, 1, 2, 3, 1, 2, 3, 1])); // 2
+console.log(solution([1, 3, 2, 1, 2, 1, 3, 1, 2])); // 0
 
-
+// [1,2,3,4,2,2,2,2,]
